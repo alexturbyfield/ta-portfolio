@@ -8,6 +8,7 @@ type ArtGalleryClientProps = {
   media: Array<{
     src: string
     title: string
+    notes?: string[]
     kind: 'image' | 'video'
   }>
 }
@@ -130,6 +131,13 @@ export default function ArtGalleryClient({ media }: ArtGalleryClientProps) {
                     {activeMedia.kind === 'video' ? 'Motion' : 'Artwork'}
                   </p>
                   <p className="mt-2 text-base text-white/88">{activeMedia.title}</p>
+                  {activeMedia.notes && activeMedia.notes.length > 0 ? (
+                    <div className="mt-4 space-y-2 text-sm leading-7 text-slate-300/78">
+                      {activeMedia.notes.map((note) => (
+                        <p key={note}>{note}</p>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
               </div>
             </div>

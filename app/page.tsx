@@ -1,10 +1,28 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const statCards = [
-  { label: 'Focus', value: 'Technical art, real-time graphics, tools, and spatial systems' },
-  { label: 'Built For', value: 'Games, AR, educational software, and simulation-minded experiences' },
-  { label: 'Approach', value: 'Visual intent backed by production-ready engineering and a little curiosity' },
+const standoutCards = [
+  {
+    label: 'Real-Time Graphics',
+    value: 'Rendering features, shaders, VFX, and runtime visuals built to hold up in production.',
+    accent: 'from-orange-300/18 via-orange-300/[0.08] to-transparent',
+  },
+  {
+    label: 'Artist-Facing Tools',
+    value: 'Pipelines and workflows that give teams more control without adding friction.',
+    accent: 'from-violet-300/18 via-violet-300/[0.08] to-transparent',
+  },
+  {
+    label: 'Cross-Discipline Systems',
+    value: 'Strong where art, engineering, interaction, and technical problem solving overlap.',
+    accent: 'from-cyan-200/18 via-cyan-200/[0.08] to-transparent',
+  },
+]
+
+const accomplishmentHighlights = [
+  'Pokémon GO procedural world system development',
+  'Render pipeline and shader migration leadership',
+  'Award-winning educational game development',
 ]
 
 export default function Home() {
@@ -46,6 +64,50 @@ export default function Home() {
               goals, data, and interaction needs into stable runtime behavior
               that feels intentional on screen and usable in production.
             </p>
+
+            <div className="space-y-3">
+              <p className="text-[0.7rem] uppercase tracking-[0.28em] text-white/42">
+                Selected Highlights
+              </p>
+              <div className="flex flex-wrap gap-2.5">
+                {accomplishmentHighlights.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-sm text-slate-200/82 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-4">
+            <p className="text-[0.7rem] uppercase tracking-[0.28em] text-white/42">
+              Best fit for teams hiring across technical art, graphics, and
+              systems work
+            </p>
+
+            <div className="grid gap-3 md:grid-cols-3">
+              {standoutCards.map((card) => (
+                <div
+                  key={card.label}
+                  className="relative overflow-hidden rounded-[1.3rem] border border-white/10 bg-[#1d1d1d]/90 p-5 shadow-[0_18px_50px_rgba(0,0,0,0.24)]"
+                >
+                  <div
+                    className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${card.accent}`}
+                  />
+                  <div className="relative">
+                    <p className="font-[family-name:var(--font-display)] text-[1.02rem] uppercase tracking-[0.12em] text-white/92">
+                      {card.label}
+                    </p>
+                    <p className="mt-3 text-sm leading-6 text-slate-200/82">
+                      {card.value}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -63,21 +125,6 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid gap-3 pt-2 md:grid-cols-3">
-            {statCards.map((card) => (
-              <div
-                key={card.label}
-                className="rounded-[1.2rem] border border-violet-300/10 bg-[#1d1d1d]/85 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
-              >
-                <p className="text-[0.68rem] uppercase tracking-[0.3em] text-violet-100/48">
-                  {card.label}
-                </p>
-                <p className="mt-3 text-sm leading-6 text-slate-200/88">
-                  {card.value}
-                </p>
-              </div>
-            ))}
-          </div>
         </div>
 
         <div className="relative mx-auto w-full max-w-[34rem]">
@@ -99,13 +146,13 @@ export default function Home() {
             <div className="relative overflow-hidden rounded-[1.35rem] border border-white/8 bg-black/25">
               <div className="pointer-events-none absolute inset-0 z-10 bg-[linear-gradient(180deg,rgba(0,0,0,0)_60%,rgba(4,12,18,0.8)_100%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_34%,transparent_70%,rgba(255,255,255,0.02))]" />
               <div className="pointer-events-none absolute inset-0 z-10 opacity-40 [background-image:linear-gradient(rgba(145,220,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(145,220,255,0.08)_1px,transparent_1px)] [background-size:32px_32px]" />
-              <div className="relative aspect-[4/5]">
+              <div className="relative aspect-[6/5] sm:aspect-[5/4] lg:aspect-[4/5]">
                 <Image
                   src="/images/main/veins.png"
                   alt="Abstract organic veins artwork"
                   fill
                   priority
-                  className="object-cover object-[24%_50%] saturate-[1.08] contrast-[1.02]"
+                  className="object-cover object-[42%_48%] sm:object-[34%_50%] lg:object-[24%_50%] saturate-[1.08] contrast-[1.02]"
                 />
               </div>
             </div>

@@ -45,6 +45,21 @@ const artTitles: Record<string, string> = {
   'wormhole.jpg': 'Wormhole',
 }
 
+const artNotes: Record<string, string[]> = {
+  'LevelUp.mp4': [
+    'My work on this piece included UI, animation, and VFX.',
+    'Michelle Hung provided illustration and art direction.',
+  ],
+  'Radish.mov': [
+    'My work on this piece included shaders and 3D modeling.',
+    'Kyle Olson provided the concept.',
+  ],
+  'Shaymin.mp4': [
+    'My work on this piece included shaders, animation, camera work, and architecture.',
+    'Craig Kitzmann created the 3D art, layout, concept work, and painting.',
+  ],
+}
+
 const featuredMediaOrder = [
   'Shaymin.mp4',
   'LevelUp.mp4',
@@ -158,6 +173,7 @@ export default async function ArtPage() {
     .map((file) => ({
       src: `/images/art/${encodeURIComponent(file)}`,
       title: formatTitle(file),
+      notes: artNotes[file],
       kind: videoExtensions.has(path.extname(file).toLowerCase())
         ? ('video' as const)
         : ('image' as const),

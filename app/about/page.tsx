@@ -75,7 +75,7 @@ export default function AboutPage() {
                 software, tools, shaders, VFX, UI, pipelines, and feature
                 implementation. I still think of myself first as a technical
                 artist, but a lot of the underlying work translates naturally
-                to design technologist, engineer-adjacent, and digital twin
+                to design technologist, graphics engineering, and digital twin
                 style environments where visuals, data, and interaction all
                 need to cooperate.
               </p>
@@ -83,8 +83,9 @@ export default function AboutPage() {
                 A lot of what I do is translation: turning ideas into systems,
                 turning data into visuals, and helping teams move from rough
                 intent to something stable, performant, and usable in
-                production. I take the work seriously, but I do think the
-                process goes better when people can breathe a little.
+                production. I like helping teams stay focused, feel excited
+                about what they&apos;re building, and keep good momentum while
+                the work takes shape.
               </p>
             </div>
           </div>
@@ -151,8 +152,9 @@ export default function AboutPage() {
               <p>
                 Whether I&apos;m writing feature logic, optimizing content,
                 building shaders, or helping untangle workflow issues, I try to
-                make the process feel solid and collaborative while the work is
-                getting done, with as little unnecessary drama as possible.
+                make the process feel solid, collaborative, and steady while
+                the work is getting done, so teams can stay focused and do
+                their best work.
               </p>
             </div>
           </article>
