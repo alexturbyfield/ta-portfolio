@@ -27,7 +27,7 @@ const accomplishmentHighlights = [
 
 export default function Home() {
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-orange-300/10 bg-[#181818]/92 px-6 py-8 shadow-[0_36px_100px_rgba(0,0,0,0.34)] sm:px-8 md:px-10 lg:px-12 lg:py-10">
+    <section className="relative overflow-hidden rounded-[2rem] border border-orange-300/10 bg-[#181818]/92 px-5 py-8 shadow-[0_36px_100px_rgba(0,0,0,0.34)] sm:px-8 md:px-10 lg:px-12 lg:py-10">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,154,76,0.14)_0%,transparent_34%,rgba(145,104,255,0.12)_70%,transparent_100%),linear-gradient(24deg,transparent_8%,rgba(255,154,76,0.07)_42%,transparent_68%),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_38%)]" />
       <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:linear-gradient(rgba(140,215,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(140,215,255,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
 
@@ -53,8 +53,9 @@ export default function Home() {
               Real-time Graphics / Tools / Interactive Systems
             </p>
 
-            <p className="font-[family-name:var(--font-display)] text-[2.8rem] uppercase leading-[0.95] tracking-[0.1em] text-white/88 sm:text-[3.8rem] lg:text-[4.5rem]">
-              Alex Turbyfield
+            <p className="font-[family-name:var(--font-display)] text-[2.3rem] uppercase leading-[0.9] tracking-[0.06em] text-white/88 sm:text-[3.8rem] sm:tracking-[0.1em] lg:text-[4.5rem]">
+              <span className="block sm:inline">Alex</span>{' '}
+              <span className="block sm:inline">Turbyfield</span>
             </p>
 
             <p className="max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
