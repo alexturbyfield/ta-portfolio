@@ -138,6 +138,64 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'pogo-whats-your-favorite-ar',
+    title: "Pokémon GO What's Your Favorite?",
+    subtitle: 'Technical Artist, AR Composition Systems',
+    description:
+      `I helped shape the composition systems behind Pokémon GO's "What's Your Favorite?" AR feature, building rules and behaviors that made photo moments feel more intentional, expressive, and flattering across a huge range of Pokémon.`,
+    role: 'Technical Artist',
+    date: '2025-2026',
+    tools: [
+      'Unity',
+      'C#',
+      'AR',
+      'Scriptable Objects',
+      'Runtime Tools',
+      'Composition Logic',
+    ],
+    heroImage: '/images/projects/whats-your-favorite.webp',
+    sections: [
+      {
+        heading: 'Project Goal',
+        body: [
+          `What's Your Favorite? was designed as a broadly accessible AR camera feature in Pokémon GO, letting players take photos with almost any Pokémon, even if they had not caught it yet.`,
+          'The feature needed to feel playful and easy to use, but the real challenge was underneath that simplicity. If players were going to create photos with a huge variety of Pokémon and human subjects, the system needed to help those compositions land well by default.',
+        ],
+      },
+      {
+        heading: 'Role & Collaboration',
+        body: [
+          'As a Technical Artist, I worked closely with the primary engineer shaping the AR architecture, focusing on how to make the compositions feel stronger through systemic behavior rather than one-off tuning.',
+          'Using both engineering tools and tools of my own, I helped define rule sets for how Pokémon should be placed in relation to the subject, the camera, and the overall framing of the photo.',
+          'That collaboration was important because the feature was not about hand-authoring individual moments. It was about building a flexible system that could make a very wide content set feel intentional and photo-friendly.',
+        ],
+      },
+      {
+        heading: 'Placement & Behavior Systems',
+        body: [
+          'A large part of the work centered on defining systemic rules for placement. Different Pokémon types needed different handling, especially when dealing with scale, posture, and how they should share the frame with a person.',
+          `I wrote logic for flying Pokémon so their faces would generally line up with the subject's face, helping the result feel more like a shared portrait instead of two disconnected elements in the same shot.`,
+          'I also created behavior logic to rotate Pokémon heads so they could look toward either the person or the camera, depending on what produced the strongest and most natural-looking composition.',
+        ],
+      },
+      {
+        heading: 'Authoring & Overrides',
+        body: [
+          'To make the system practical to tune, I created a Scriptable Object structure that contained rules as well as overrides for individual Pokémon types.',
+          'That let us keep the broader composition behavior systemic while still giving the team a clean way to account for species-specific exceptions, unusual silhouettes, or pose needs that did not fit the default rules.',
+          'The result was a workflow that balanced consistency with flexibility, which is exactly what a content-heavy live feature like this needs in production.',
+        ],
+      },
+      {
+        heading: 'Outcome',
+        body: [
+          `What's Your Favorite? needed to feel simple for players, even though a lot of composition logic was happening behind the scenes.`,
+          'The work was about helping the feature produce photos that felt more flattering, more intentional, and easier to share across a wide range of Pokémon without asking the player to fight the system.',
+        ],
+      },
+    ],
+  },
+  {
     slug: 'pokemon-worlds-2025-battle-arena',
     title: 'Pokémon World Championships 2025 Battle Arena',
     subtitle: 'Technical Artist, Event Battle Environment',
