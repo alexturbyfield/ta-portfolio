@@ -24,6 +24,7 @@ export type Project = {
   heroImagePosition?: string
   heroBackgroundImage?: string
   images?: string[]
+  carouselVariant?: 'default' | 'onion'
   videos?: string[]
   sections?: ProjectSection[]
   heroBackgroundBlur?: boolean
@@ -37,43 +38,57 @@ export const projects: Project[] = [
     title: 'Pokémon GO Biomes',
     subtitle: 'Technical Lead, Encounter Environments',
     description:
-      'I designed and led technical development of a procedural system that gives encounter scenes a distinct sense of place, helping the world respond to where the player is without breaking readability or performance.',
+      'I led technical development for a procedural encounter world system that lets Pokémon GO quietly echo the place you are standing. Streets, terrain, season, weather, and live events all shape the scene, so a beach can feel breezy, a forest shaded, and a winter event touched by frost without sacrificing speed or clarity.',
     role: 'Lead Technical Artist',
     date: 'Spring 2024',
     tools: ['Unity', 'C#', 'HLSL', 'Autodesk Maya', 'Python'],
-    heroImage: '/images/projects/header-biomes.jpg',
+    heroImage: '/images/projects/biomes/biomes-pump.png',
+    images: [
+      '/images/projects/biomes/biomes-pump.png',
+      '/images/projects/biomes/biomes-day.png',
+      '/images/projects/biomes/biomes-evening.png',
+      '/images/projects/biomes/biomes-grasslands.png',
+      '/images/projects/biomes/biomes-cand.png',
+      '/images/projects/biomes/biomes-pika.png',
+      '/images/projects/biomes/biomes_bulb.png',
+      '/images/projects/biomes/biomes_squirt.png',
+      '/images/projects/biomes/biomes_wigg.png',
+      '/images/projects/biomes/screen_3840x2160_2024-04-04_10-37-33.png',
+      '/images/projects/biomes/screen_3840x2160_2024-04-04_10-37-38.png',
+      '/images/projects/biomes/screen_3840x2160_2024-04-04_15-35-19.png',
+    ],
+    carouselVariant: 'onion',
     sections: [
       {
-        heading: 'Project Goal',
+        heading: 'System Idea',
         body: [
-          'When we set out to build the Biomes feature for Pokémon GO, the goal was not just visual variety. It was to make the world feel aware of where you were.',
-          'A coastline should not feel like a forest, and an urban space should not feel like a park. The change needed to be subtle, but consistent enough that players could feel it as they moved.',
+          'Encounters are generated from street and terrestrial data rather than hand-built scenes.',
+          'Variation is seeded to your location, so places keep a sense of identity instead of feeling random every time.',
+          'The goal was to make the world feel responsive without making it feel unstable.',
         ],
       },
       {
-        heading: 'Role & Approach',
+        heading: 'World Logic',
         body: [
-          'As Technical Lead, I worked across engineering and tech art to turn that idea into something scalable and usable in production.',
-          'I designed a Scriptable Object pipeline that maps ecosystem and world data directly to spawn data. This made the system fully data-driven, so new biomes, seasonal changes, and live updates could be authored without engineering support.',
-          'On the runtime side, I built a procedural spawn system that maps asset types such as trees, rocks, and foliage to spawn points with weighted probabilities. Instead of hand-authoring scenes, we defined rules. The system generates variation per encounter while staying within clear constraints, so scenes feel different based on location but remain readable and intentional.',
-          'I worked closely with artists throughout development, training them on the tools and iterating on workflows so they could control composition and mood without fighting the system.',
+          'Prop placement follows authored rulesets tied to the environment around the player.',
+          'Cities, mountains, grasslands, forests, beaches, rivers, lakes, and open ocean each pull from their own visual vocabulary.',
+          'Randomization lives inside those constraints, so scenes stay surprising without losing their sense of place.',
         ],
       },
       {
-        heading: 'Technical & Performance',
+        heading: 'Seasonal Motion',
         body: [
-          'Performance was a constant constraint, especially on older devices. We profiled on low-end hardware, validated changes on-device, and used early player behavior to guide where to focus.',
-          'On the rendering side, I pushed GPU instancing across environment assets to reduce draw calls, and iterated on shader cost to keep performance predictable. We established LOD strategies to scale asset complexity, and I worked with artists to keep poly counts and material usage within budget.',
-          'We also reworked the spawn pipeline to move as much work out of runtime as possible. Data that did not need to be computed at runtime was pre-baked and cached, reducing per-encounter cost. Encounters needed to load immediately since catching is a fast interaction, so minimizing setup overhead was critical.',
-          'Alongside spawning, I helped guide supporting tech art systems including seasonal and weather variation, time-of-day tinting across environments and Pokémon, fog, shadows, and interaction details like trampling grass.',
-          'Throughout development, a few constraints stayed fixed. Pokémon could not be obscured or blocked. Large assets needed strong silhouettes. Scenes had to read instantly.',
+          'Leaves shift with the season, from fresh greens to autumn color and cherry blossoms in bloom.',
+          'Weather and event states can reshape the same biome, letting winter holidays or Halloween arrive without rebuilding the feature.',
+          'Lighting, fog, and shadow treatments were tuned to make each environment feel atmospheric at a glance.',
         ],
       },
       {
-        heading: 'Outcome',
+        heading: 'Artist Control',
         body: [
-          'Biomes was a systems-driven feature that needed to disappear into the experience. The goal was not just variation, but consistency.',
-          'The world should respond to where you are without the player thinking about how it works.',
+          'I built tooling that let artists generate, preview, and tune environments instead of fighting raw data.',
+          'Rules and overrides gave the team a clean way to guide composition, spawn behavior, and special-case content.',
+          'That balance between system and authorship made the feature scalable while still feeling intentional.',
         ],
       },
     ],
@@ -94,8 +109,7 @@ export const projects: Project[] = [
       'Shader Graph',
       'Custom Renderer Features',
     ],
-    heroImage: '/images/projects/pokemon go.png',
-    heroImageContain: true,
+    heroImage: '/images/projects/urp-header.jpg',
     sections: [
       {
         heading: 'Project Goal',
@@ -200,33 +214,26 @@ export const projects: Project[] = [
     title: 'Pokémon World Championships 2025 Battle Arena',
     subtitle: 'Technical Artist, Event Battle Environment',
     description:
-      'I contributed technical art support for a special Pokémon GO battle arena tied to the 2025 Pokémon World Championships, helping create an event-specific environment that felt celebratory, readable, and production-ready.',
+      'I helped build a special Pokémon GO battle arena for the 2025 World Championships, shaping the screen content, VFX, crowd energy, and animation language so the space felt grand, competitive, and unmistakably built for a world-stage event.',
     role: 'Technical Artist',
     date: '2025',
     tools: ['Unity', 'C#', 'HLSL', 'Shaders', 'VFX', 'Mobile Optimization'],
     heroImage: '/images/projects/pokemon-worlds-arena-stage.avif',
+    videos: ['https://www.youtube.com/embed/R8BrKGTaVJs?start=20'],
     sections: [
       {
-        heading: 'Project Goal',
+        heading: 'What I Focused On',
         body: [
-          'The 2025 Pokémon World Championships Battle Arena needed to feel like a special competitive event space while still fitting naturally inside Pokémon GO.',
-          'The goal was to support the energy of a championship moment without overwhelming the core battle experience. The arena needed visual presence, but player clarity and performance still had to come first.',
+          'Dynamic shaders for the video wall, crowd, and barrier systems.',
+          'Metallic and electric surface treatments to sharpen the arena mood.',
+          'State-driven barrier and lighting changes tied to battle flow.',
+          'Video wall camera animation, plus technical support and logic for the 3D artist.',
         ],
       },
       {
-        heading: 'Role & Approach',
+        heading: 'Interactive Barrier Study',
         body: [
-          'My work focused on the technical art layer between visual direction and runtime implementation.',
-          'That meant helping translate event art goals into a battle environment that could run reliably on mobile devices, read clearly during play, and maintain the level of polish expected from a major live event.',
-          'As with much of my live game work, the challenge was balancing spectacle with constraints: making the space feel distinct while keeping the interaction understandable and stable.',
-        ],
-      },
-      {
-        heading: 'Technical Considerations',
-        body: [
-          'Battle environments have to support fast readability. Effects, lighting, silhouettes, and background detail all need to complement the action rather than compete with it.',
-          'I approached the work with those constraints in mind, supporting visual systems that could feel event-specific while staying predictable for gameplay and performance.',
-          'The arena also needed to fit into existing production pipelines so that it could be tested, integrated, and maintained alongside the rest of the Pokémon GO client.',
+          'This interactive shader section shows the kind of barrier behavior the arena used to communicate energy and state changes.',
         ],
         shaderShowcase: true,
         codeExample: {
@@ -331,8 +338,8 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
       {
         heading: 'Outcome',
         body: [
-          'The Battle Arena was a focused event environment designed to elevate the World Championships presence in Pokémon GO without sacrificing usability.',
-          'For me, it was another example of technical art serving as connective tissue: helping a visual idea become something performant, readable, and shippable inside a live game.',
+          'The final arena gave Pokémon GO a battle space that felt more theatrical, more competitive, and more event-specific without losing clarity.',
+          'For me, it was a good example of using technical art systems to make presentation, atmosphere, and gameplay support each other at the same time.',
         ],
       },
     ],
@@ -406,7 +413,7 @@ void mainImage(out vec4 fragColor, in vec2 fragCoord) {
     role: 'Technical Artist',
     date: 'Fall 2019-Spring 2020',
     tools: ['Unity', 'C#', 'UGUI', 'Shaders', 'VFX', 'WebGL', 'Mobile'],
-    heroImage: '/images/projects/bingo-hero.jpg',
+    heroImage: '/images/projects/bingo-hero.png',
     videos: ['/images/projects/bingo/level-up.mp4'],
     sections: [
       {

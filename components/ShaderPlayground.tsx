@@ -381,9 +381,6 @@ export default function ShaderPlayground({
               <p className="text-xs uppercase tracking-[0.24em] text-orange-100/62">
                 Live Controls
               </p>
-              <p className="text-[0.65rem] uppercase tracking-[0.2em] text-white/42">
-                tweak the wave
-              </p>
             </div>
 
             <div className="space-y-4">

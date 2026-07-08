@@ -7,11 +7,13 @@ import { createPortal } from 'react-dom'
 type ProjectImageCarouselProps = {
   images: string[]
   projectTitle: string
+  variant?: 'default' | 'onion'
 }
 
 export default function ProjectImageCarousel({
   images,
   projectTitle,
+  variant = 'default',
 }: ProjectImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [expandedImage, setExpandedImage] = useState<string | null>(null)
@@ -38,6 +40,9 @@ export default function ProjectImageCarousel({
   function showNext() {
     setActiveIndex((index) => (index === images.length - 1 ? 0 : index + 1))
   }
+
+  const previousIndex = activeIndex === 0 ? images.length - 1 : activeIndex - 1
+  const nextIndex = activeIndex === images.length - 1 ? 0 : activeIndex + 1
 
   const lightbox =
     expandedImage && typeof document !== 'undefined'
@@ -85,60 +90,154 @@ export default function ProjectImageCarousel({
   return (
     <>
       <div className="space-y-4">
-        <div className="relative overflow-hidden rounded-[1.25rem] border border-white/12 bg-black shadow-[0_18px_55px_rgba(0,0,0,0.32)]">
-          <button
-            type="button"
-            onClick={() => setExpandedImage(activeImage)}
-            className="group relative block aspect-video w-full overflow-hidden text-left"
-            aria-label={`Expand ${projectTitle} gallery image ${activeIndex + 1}`}
-          >
-            <div
-              className="flex h-full transition-transform duration-500 ease-out"
-              style={{ transform: `translateX(-${activeIndex * 100}%)` }}
-            >
-              {images.map((image, index) => (
-                <div key={image} className="relative h-full w-full shrink-0">
-                  <Image
-                    src={image}
-                    alt={`${projectTitle} gallery image ${index + 1}`}
-                    fill
-                    sizes="(min-width: 1024px) 680px, 92vw"
-                    className="object-cover transition duration-500 group-hover:scale-[1.02]"
-                  />
-                </div>
-              ))}
-            </div>
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-black/10 opacity-80" />
-            <div className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
-              Click to expand
-            </div>
-            <div className="absolute bottom-4 right-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
-              {activeIndex + 1} / {images.length}
-            </div>
-          </button>
-
-          {images.length > 1 && (
-            <>
+        {variant === 'onion' ? (
+          <div className="relative overflow-hidden rounded-[1.45rem] border border-white/12 bg-[#0a0a0a] px-3 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.32)] sm:px-5">
+            <div className="relative mx-auto aspect-[16/10] w-full max-w-4xl">
               <button
                 type="button"
                 onClick={showPrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-orange-300/35 hover:bg-black/75 hover:text-white"
+                className="absolute left-0 top-1/2 z-10 hidden h-[78%] w-[28%] -translate-x-[18%] -translate-y-1/2 overflow-hidden rounded-[1.2rem] border border-white/10 bg-black/40 opacity-70 transition hover:opacity-95 md:block"
                 aria-label="Show previous image"
               >
-                Prev
+                <div className="relative h-full w-full">
+                  <Image
+                    src={images[previousIndex]}
+                    alt={`${projectTitle} gallery image ${previousIndex + 1}`}
+                    fill
+                    sizes="28vw"
+                    className="object-cover opacity-88 blur-[0.2px]"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.45),rgba(0,0,0,0.15))]" />
+                </div>
               </button>
+
+              <button
+                type="button"
+                onClick={() => setExpandedImage(activeImage)}
+                className="group absolute inset-x-[8%] top-0 z-20 block h-full overflow-hidden rounded-[1.4rem] border border-white/14 bg-black text-left shadow-[0_24px_70px_rgba(0,0,0,0.42)] md:inset-x-[14%]"
+                aria-label={`Expand ${projectTitle} gallery image ${activeIndex + 1}`}
+              >
+                <div
+                  className="flex h-full transition-transform duration-500 ease-out"
+                  style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+                >
+                  {images.map((image, index) => (
+                    <div key={image} className="relative h-full w-full shrink-0">
+                      <Image
+                        src={image}
+                        alt={`${projectTitle} gallery image ${index + 1}`}
+                        fill
+                        sizes="(min-width: 1024px) 720px, 92vw"
+                        className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  ))}
+                </div>
+
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.14)_42%,rgba(0,0,0,0.64)_100%)]" />
+                <div className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
+                  Tap for detail
+                </div>
+                <div className="absolute bottom-4 right-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
+                  {activeIndex + 1} / {images.length}
+                </div>
+              </button>
+
               <button
                 type="button"
                 onClick={showNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-violet-300/35 hover:bg-black/75 hover:text-white"
+                className="absolute right-0 top-1/2 z-10 hidden h-[78%] w-[28%] translate-x-[18%] -translate-y-1/2 overflow-hidden rounded-[1.2rem] border border-white/10 bg-black/40 opacity-70 transition hover:opacity-95 md:block"
                 aria-label="Show next image"
               >
-                Next
+                <div className="relative h-full w-full">
+                  <Image
+                    src={images[nextIndex]}
+                    alt={`${projectTitle} gallery image ${nextIndex + 1}`}
+                    fill
+                    sizes="28vw"
+                    className="object-cover opacity-88 blur-[0.2px]"
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(0,0,0,0.45),rgba(0,0,0,0.15))]" />
+                </div>
               </button>
-            </>
-          )}
-        </div>
+            </div>
+            {images.length > 1 && (
+              <div className="mt-4 flex items-center justify-center gap-3 md:hidden">
+                <button
+                  type="button"
+                  onClick={showPrevious}
+                  className="rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-orange-300/35 hover:bg-black/75 hover:text-white"
+                  aria-label="Show previous image"
+                >
+                  Prev
+                </button>
+                <button
+                  type="button"
+                  onClick={showNext}
+                  className="rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-violet-300/35 hover:bg-black/75 hover:text-white"
+                  aria-label="Show next image"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="relative overflow-hidden rounded-[1.25rem] border border-white/12 bg-black shadow-[0_18px_55px_rgba(0,0,0,0.32)]">
+            <button
+              type="button"
+              onClick={() => setExpandedImage(activeImage)}
+              className="group relative block aspect-video w-full overflow-hidden text-left"
+              aria-label={`Expand ${projectTitle} gallery image ${activeIndex + 1}`}
+            >
+              <div
+                className="flex h-full transition-transform duration-500 ease-out"
+                style={{ transform: `translateX(-${activeIndex * 100}%)` }}
+              >
+                {images.map((image, index) => (
+                  <div key={image} className="relative h-full w-full shrink-0">
+                    <Image
+                      src={image}
+                      alt={`${projectTitle} gallery image ${index + 1}`}
+                      fill
+                      sizes="(min-width: 1024px) 680px, 92vw"
+                      className="object-cover transition duration-500 group-hover:scale-[1.02]"
+                    />
+                  </div>
+                ))}
+              </div>
+
+              <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-black/10 opacity-80" />
+              <div className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
+                Click to expand
+              </div>
+              <div className="absolute bottom-4 right-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
+                {activeIndex + 1} / {images.length}
+              </div>
+            </button>
+
+            {images.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  onClick={showPrevious}
+                  className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-orange-300/35 hover:bg-black/75 hover:text-white"
+                  aria-label="Show previous image"
+                >
+                  Prev
+                </button>
+                <button
+                  type="button"
+                  onClick={showNext}
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-violet-300/35 hover:bg-black/75 hover:text-white"
+                  aria-label="Show next image"
+                >
+                  Next
+                </button>
+              </>
+            )}
+          </div>
+        )}
 
         {images.length > 1 && (
           <div className="flex items-center justify-center gap-2">

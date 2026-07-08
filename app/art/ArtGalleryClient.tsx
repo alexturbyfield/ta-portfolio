@@ -37,7 +37,49 @@ export default function ArtGalleryClient({ media }: ArtGalleryClientProps) {
 
   return (
     <>
-      <div className="overflow-x-auto pb-2">
+      <div className="sm:hidden">
+        <div className="-mx-1 flex snap-x snap-mandatory gap-4 overflow-x-auto px-1 pb-3">
+          {media.map((item, index) => (
+            <button
+              key={item.src}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              className="group relative block w-[min(82vw,22rem)] shrink-0 snap-center overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#151515] text-left shadow-[0_18px_50px_rgba(0,0,0,0.28)] transition active:scale-[0.99]"
+            >
+              <div className="relative aspect-[4/5] overflow-hidden">
+                {item.kind === 'image' ? (
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    fill
+                    sizes="82vw"
+                    className="object-cover transition duration-300 group-active:scale-[1.01]"
+                  />
+                ) : (
+                  <video
+                    src={item.src}
+                    muted
+                    loop
+                    autoPlay
+                    playsInline
+                    preload="metadata"
+                    className="h-full w-full object-cover transition duration-300 group-active:scale-[1.01]"
+                  />
+                )}
+                <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_52%,rgba(0,0,0,0.76)_100%)]" />
+              </div>
+              <div className="absolute bottom-0 left-0 right-0 px-4 py-3">
+                <p className="text-[0.68rem] uppercase tracking-[0.24em] text-white/72">
+                  {item.kind === 'video' ? 'Motion' : 'Artwork'}
+                </p>
+                <p className="mt-1 text-sm text-white/90">{item.title}</p>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="hidden overflow-x-auto pb-2 sm:block">
         <div className="grid min-w-max grid-rows-2 gap-4">
           {[topRow, bottomRow].map((rowMedia, rowOffset) => (
             <div key={`row-${rowOffset}`} className="flex gap-4">
@@ -51,7 +93,7 @@ export default function ArtGalleryClient({ media }: ArtGalleryClientProps) {
                     onClick={() => setActiveIndex(originalIndex)}
                     className="group relative block overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#151515] text-left shadow-[0_18px_50px_rgba(0,0,0,0.28)] transition hover:-translate-y-1 hover:border-orange-300/20"
                   >
-                    <div className="relative h-[220px] w-[280px] overflow-hidden sm:h-[250px] sm:w-[320px]">
+                    <div className="relative h-[250px] w-[320px] overflow-hidden">
                       {item.kind === 'image' ? (
                         <Image
                           src={item.src}

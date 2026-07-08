@@ -8,7 +8,7 @@ export default function ProjectsPage() {
       <div className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(140,215,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(140,215,255,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
 
       <div className="relative space-y-8">
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.15fr)_minmax(280px,0.75fr)] lg:items-end">
+        <div className="grid gap-6">
           <div className="space-y-4">
             <p className="font-[family-name:var(--font-display)] text-sm uppercase tracking-[0.34em] text-orange-100/58">
               Selected Work
@@ -22,21 +22,7 @@ export default function ProjectsPage() {
             </h1>
             <p className="max-w-3xl text-base leading-8 text-slate-300/78 sm:text-lg">
               A selection of projects across live games, graphics migrations,
-              educational software, and cross-discipline technical art work,
-              with an emphasis on real-time systems, production tooling, and
-              visually driven implementation that can also translate well to
-              design technologist and simulation-minded work.
-            </p>
-          </div>
-
-          <div className="rounded-[1.45rem] border border-violet-300/12 bg-[#1a1a1a]/86 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-            <p className="text-[0.68rem] uppercase tracking-[0.3em] text-violet-100/48">
-              Active Set
-            </p>
-            <p className="mt-3 text-sm leading-7 text-slate-300/82">
-              Real-time graphics, procedural environments, tool building,
-              rendering migrations, interactive software, and cross-team
-              production support.
+              educational software, and cross-discipline technical art work.
             </p>
           </div>
         </div>
@@ -56,6 +42,9 @@ export default function ProjectsPage() {
                   role={project.role}
                   date={project.date}
                   description={project.description}
+                  imageSrc={project.heroImage}
+                  imagePosition={project.heroImagePosition}
+                  imageContain={project.heroImageContain}
                   href={`/projects/${project.slug}`}
                 />
               </div>
