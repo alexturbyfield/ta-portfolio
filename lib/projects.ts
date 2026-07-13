@@ -35,13 +35,13 @@ export type Project = {
 export const projects: Project[] = [
   {
     slug: 'pogo-encounters',
-    title: 'Pokémon GO Biomes',
-    subtitle: 'Technical Lead, Encounter Environments',
+    title: 'Building a Scalable, Data-Driven Biome System',
+    subtitle: 'Pokémon GO • Feature Technical Lead',
     description:
-      'I led technical development for a procedural encounter world system that lets Pokémon GO quietly echo the place you are standing. Streets, terrain, season, weather, and live events all shape the scene, so a beach can feel breezy, a forest shaded, and a winter event touched by frost without sacrificing speed or clarity.',
-    role: 'Lead Technical Artist',
+      'How do you make millions of encounter locations feel local, seasonal, and alive without hand-authoring the world? I led technical development for a biome system that translated map context, ecosystem data, artist-authored rules, and live service configuration into performant mobile encounter environments.',
+    role: 'Feature Technical Lead',
     date: 'Spring 2024',
-    tools: ['Unity', 'C#', 'HLSL', 'Autodesk Maya', 'Python'],
+    tools: ['Unity', 'C#', 'HLSL', 'Scriptable Objects', 'GPU Instancing', 'Python'],
     heroImage: '/images/projects/biomes/biomes-pump.png',
     images: [
       '/images/projects/biomes/biomes-pump.png',
@@ -60,35 +60,43 @@ export const projects: Project[] = [
     carouselVariant: 'onion',
     sections: [
       {
-        heading: 'System Idea',
+        heading: 'Procedural Placement',
         body: [
-          'Encounters are generated from street and terrestrial data rather than hand-built scenes.',
-          'Variation is seeded to your location, so places keep a sense of identity instead of feeling random every time.',
-          'The goal was to make the world feel responsive without making it feel unstable.',
+          'Encounter scenes are generated from street, terrain, and ecosystem data instead of hand-authored layouts.',
+          'Placement is seeded to location so a place can feel persistent rather than random each time you return.',
+          'Variation happens inside authored rules, which keeps the system expressive without sacrificing readability.',
         ],
       },
       {
-        heading: 'World Logic',
+        heading: 'Data-Driven Authoring',
         body: [
-          'Prop placement follows authored rulesets tied to the environment around the player.',
-          'Cities, mountains, grasslands, forests, beaches, rivers, lakes, and open ocean each pull from their own visual vocabulary.',
-          'Randomization lives inside those constraints, so scenes stay surprising without losing their sense of place.',
+          'I designed a Scriptable Object pipeline that maps biome rules directly to spawn behavior and environment configuration.',
+          'That let the team author new biome variants, tune balance, and support live updates without needing engineering for every change.',
+          'The result was a maintainable worldbuilding system that scaled better than one-off scene work.',
         ],
       },
       {
-        heading: 'Seasonal Motion',
+        heading: 'Season, Weather, and Events',
         body: [
-          'Leaves shift with the season, from fresh greens to autumn color and cherry blossoms in bloom.',
-          'Weather and event states can reshape the same biome, letting winter holidays or Halloween arrive without rebuilding the feature.',
-          'Lighting, fog, and shadow treatments were tuned to make each environment feel atmospheric at a glance.',
+          'The same biome can shift across season, weather, and event states, from cherry blossoms to winter dressing to Halloween mood changes.',
+          'Lighting, fog, and shadow treatments help those changes read immediately without turning the world noisy.',
+          'This let live service content feel integrated into the system instead of bolted on top of it.',
         ],
       },
       {
-        heading: 'Artist Control',
+        heading: 'Rendering and Performance',
         body: [
-          'I built tooling that let artists generate, preview, and tune environments instead of fighting raw data.',
-          'Rules and overrides gave the team a clean way to guide composition, spawn behavior, and special-case content.',
-          'That balance between system and authorship made the feature scalable while still feeling intentional.',
+          'I pushed GPU instancing across environment assets, iterated on shader cost, and worked with artists on poly and material budgets.',
+          'We profiled on lower-end devices, moved nonessential work out of runtime, and cached data wherever it was safe to do so.',
+          'The goal was quick encounter load time, stable frame cost, and a feature that could survive real production constraints.',
+        ],
+      },
+      {
+        heading: 'Artist Workflow',
+        body: [
+          'I built tooling that let artists preview, generate, and tune environments instead of fighting raw world data.',
+          'Rules and overrides gave the team control over composition, special cases, and the tone of each biome family.',
+          'That balance between authorship and automation is what made the feature feel crafted at global scale.',
         ],
       },
     ],

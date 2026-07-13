@@ -156,46 +156,43 @@ export default async function ArtPage() {
 
   const media = buildFeaturedOrdering(
     files
-    .filter((file) => {
-      const extension = path.extname(file).toLowerCase()
+      .filter((file) => {
+        const extension = path.extname(file).toLowerCase()
 
-      if (imageExtensions.has(extension)) {
-        return true
-      }
+        if (imageExtensions.has(extension)) {
+          return true
+        }
 
-      if (videoExtensions.has(extension)) {
-        return preferredVideoFiles.has(file)
-      }
+        if (videoExtensions.has(extension)) {
+          return preferredVideoFiles.has(file)
+        }
 
-      return false
-    })
-    .sort((left, right) => left.localeCompare(right))
-    .map((file) => ({
-      src: `/images/art/${encodeURIComponent(file)}`,
-      title: formatTitle(file),
-      notes: artNotes[file],
-      kind: videoExtensions.has(path.extname(file).toLowerCase())
-        ? ('video' as const)
-        : ('image' as const),
-    })),
+        return false
+      })
+      .sort((left, right) => left.localeCompare(right))
+      .map((file) => ({
+        src: `/images/art/${encodeURIComponent(file)}`,
+        title: formatTitle(file),
+        notes: artNotes[file],
+        kind: videoExtensions.has(path.extname(file).toLowerCase())
+          ? ('video' as const)
+          : ('image' as const),
+      })),
   )
 
   return (
-    <section className="relative overflow-hidden rounded-[2rem] border border-orange-300/10 bg-[#181818]/92 px-6 py-8 shadow-[0_36px_100px_rgba(0,0,0,0.34)] sm:px-8 md:px-10 lg:px-12 lg:py-10">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,rgba(255,154,76,0.14)_0%,transparent_34%,rgba(145,104,255,0.12)_70%,transparent_100%),linear-gradient(24deg,transparent_8%,rgba(255,154,76,0.07)_42%,transparent_68%),linear-gradient(180deg,rgba(255,255,255,0.025),transparent_38%)]" />
-      <div className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(140,215,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(140,215,255,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
-
+    <section className="page-shell px-6 py-8 sm:px-8 md:px-10 lg:px-12 lg:py-12">
       <div className="relative space-y-8">
         <div className="space-y-4">
-          <p className="font-[family-name:var(--font-display)] text-sm uppercase tracking-[0.34em] text-orange-100/58">
+          <p className="font-[family-name:var(--font-display)] text-sm uppercase tracking-[0.34em] text-[rgba(247,244,232,0.66)]">
             Selected Art
           </p>
-          <h1 className="font-[family-name:var(--font-display)] text-4xl uppercase leading-[0.95] text-white sm:text-5xl lg:text-6xl">
+          <h1 className="font-[family-name:var(--font-display)] text-4xl uppercase leading-[0.95] text-white drop-shadow-[0_12px_32px_rgba(8,14,10,0.28)] sm:text-5xl lg:text-6xl">
             Artwork, studies,
             <br />
             and visual worlds
           </h1>
-          <p className="max-w-3xl text-base leading-8 text-slate-300/78 sm:text-lg">
+          <p className="max-w-3xl text-base leading-8 text-[rgba(247,244,232,0.84)] sm:text-lg">
             A broader look at the art side of my work, from environment and
             concept-driven pieces to game-adjacent visual development. Click
             any image for a closer view.

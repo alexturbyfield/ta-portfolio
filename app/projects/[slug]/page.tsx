@@ -42,6 +42,76 @@ const biomeWaypoints = [
   },
 ]
 
+const biomeConstraints = [
+  {
+    title: 'Mobile Hardware',
+    body: 'The feature had to hold up on lower-end phones without feeling visually stripped down.',
+  },
+  {
+    title: 'Fast Encounters',
+    body: 'Catching is quick, so environment setup cost needed to stay low and predictable.',
+  },
+  {
+    title: 'Live Service Updates',
+    body: 'Seasons, events, and world-state changes needed to ship through data rather than custom engineering work.',
+  },
+  {
+    title: 'Location Scale',
+    body: 'The system had to respond across cities, coastlines, parks, mountains, and thousands of mixed conditions.',
+  },
+  {
+    title: 'Readability',
+    body: 'Pokémon could not be obscured, silhouettes had to stay strong, and scenes needed to read instantly.',
+  },
+  {
+    title: 'Usability',
+    body: 'Artists and designers needed a workflow that stayed usable after the initial feature launch.',
+  },
+]
+
+const biomeOwnership = [
+  'Led technical development for the feature across engineering and tech art.',
+  'Designed the Scriptable Object pipeline that maps ecosystem and world data to biome behavior.',
+  'Built the procedural spawn system for trees, rocks, grass, and supporting environment props.',
+  'Drove performance work including GPU instancing, shader cost review, caching, and LOD strategy.',
+  'Built artist-facing tools and workflows so the team could author, preview, and tune content at scale.',
+]
+
+const biomeArchitecture = [
+  {
+    label: '01',
+    title: 'World and ecosystem data',
+    body: 'Street context, terrain, and environment signals define the input state.',
+  },
+  {
+    label: '02',
+    title: 'Biome rules',
+    body: 'Scriptable Object data translates that input into spawn families, overrides, and visual rules.',
+  },
+  {
+    label: '03',
+    title: 'Procedural generation',
+    body: 'Seeded placement chooses props and variation while preserving place identity.',
+  },
+  {
+    label: '04',
+    title: 'Runtime rendering',
+    body: 'Instancing, LODs, and tuned shaders keep the scene performant on mobile hardware.',
+  },
+  {
+    label: '05',
+    title: 'Live updates',
+    body: 'Seasonal, weather, and event data can reshape the same biome without rebuilding the system.',
+  },
+]
+
+const biomeResults = [
+  'Shipped as a global live service feature in Pokémon GO.',
+  'Supported millions of players across a huge range of world locations.',
+  'Gave artists a scalable authoring model instead of one-off scene production.',
+  'Created a reusable system for biome, event, weather, and seasonal variations.',
+]
+
 const worldsWaypoints = [
   {
     title: 'Grand Scale',
@@ -76,9 +146,14 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const isShowcaseProject = isBiomes || isWorlds
 
   return (
-    <div className="min-h-screen bg-[#121212] px-4 pb-10 text-white sm:px-6 sm:pb-12 md:px-8 md:pb-16">
+    <div className="relative min-h-screen px-4 pb-10 text-white sm:px-6 sm:pb-12 md:px-8 md:pb-16">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,218,171,0.12),transparent_18%),radial-gradient(circle_at_82%_16%,rgba(120,174,205,0.08),transparent_20%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(10,16,22,0.14)_28%,rgba(10,13,24,0.34)_100%)]" />
       {project.heroImage && (
-        <div className="relative w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 h-[360px] md:h-[460px]">
+        <div className={`relative w-full max-w-5xl overflow-hidden h-[360px] md:h-[460px] ${
+          isBiomes
+            ? 'rounded-[2.3rem] shadow-[0_40px_120px_rgba(0,0,0,0.42)]'
+            : 'rounded-[2rem] border border-white/10'
+        }`}>
           {project.heroBackgroundBlur ? (
             <>
               <Image
@@ -113,7 +188,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           {!project.heroImageOnly && (
             <>
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent" />
-              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,154,76,0.14)_0%,transparent_38%,rgba(145,104,255,0.14)_78%,transparent_100%)]" />
+              <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(239,225,169,0.14)_0%,transparent_38%,rgba(141,194,215,0.14)_78%,transparent_100%)]" />
 
               <div className={`absolute bottom-0 w-full p-6 md:p-10 ${
                 isBiomes
@@ -125,12 +200,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 {(isBiomes || isWorlds) && (
                   <div className="mb-5 flex flex-wrap gap-2">
                     {(isBiomes
-                      ? ['Seeded to place', 'Season aware', 'Performance minded']
+                      ? ['World scale', 'Ecology aware', 'Artist steered']
                       : ['Grand scale', 'Reactive VFX']
                     ).map((item) => (
                       <span
                         key={item}
-                        className="rounded-full border border-white/14 bg-black/35 px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.22em] text-white/82 backdrop-blur-sm"
+                        className={`rounded-full px-3 py-1.5 text-[0.68rem] uppercase tracking-[0.22em] backdrop-blur-sm ${
+                          isBiomes
+                            ? 'border border-white/10 bg-[#172116]/45 text-white/84'
+                            : 'border border-white/14 bg-black/35 text-white/82'
+                        }`}
                       >
                         {item}
                       </span>
@@ -138,7 +217,9 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                   </div>
                 )}
                 {project.subtitle && (
-                  <p className="mb-3 text-xs font-medium uppercase tracking-[0.35em] text-orange-200/90">
+                  <p className={`mb-3 text-xs font-medium uppercase tracking-[0.35em] ${
+                    isBiomes ? 'text-[#efe1a9]' : 'text-[#efe1a9]/88'
+                  }`}>
                     {project.subtitle}
                   </p>
                 )}
@@ -149,8 +230,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 </h1>
                 {isBiomes && (
                   <p className="mt-4 max-w-2xl text-sm leading-7 text-white/80 md:text-base">
-                    A procedural world layer built to make encounters feel local,
-                    seasonal, and quietly alive.
+                    A global case study in turning world data, habitat logic,
+                    and authored rules into living encounter spaces.
                   </p>
                 )}
                 {isWorlds && (
@@ -169,13 +250,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <div className="space-y-8">
           <div className={`rounded-[1.75rem] border p-8 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm ${
             isBiomes
-              ? 'border-emerald-300/18 bg-[linear-gradient(145deg,rgba(17,28,22,0.96),rgba(23,26,20,0.94)_48%,rgba(18,24,28,0.95))]'
+              ? 'border-transparent bg-[linear-gradient(145deg,rgba(28,39,26,0.72),rgba(31,35,24,0.64)_48%,rgba(24,31,29,0.66))] shadow-[0_28px_70px_rgba(0,0,0,0.28)]'
               : isWorlds
-                ? 'border-cyan-300/18 bg-[linear-gradient(145deg,rgba(18,23,31,0.96),rgba(24,21,32,0.94)_48%,rgba(20,25,36,0.95))]'
-              : 'border-orange-300/16 bg-[#1c1c1c]/95'
+                ? 'border-[rgba(141,194,215,0.16)] bg-[linear-gradient(145deg,rgba(30,41,35,0.84),rgba(42,44,34,0.78)_48%,rgba(29,39,38,0.8))]'
+              : 'border-[rgba(220,231,191,0.12)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))]'
           }`}>
-            <p className="mb-4 text-sm uppercase tracking-[0.28em] text-orange-100/58">
-              {isBiomes ? 'World Premise' : isWorlds ? 'Arena Premise' : 'Project Overview'}
+            <p className="mb-4 text-sm uppercase tracking-[0.28em] text-[#efe1a9]/58">
+              {isBiomes ? 'Research Question' : isWorlds ? 'Arena Premise' : 'Project Overview'}
             </p>
             {project.description && (
               <p className="max-w-3xl text-lg leading-8 text-white/88 md:text-xl">
@@ -184,15 +265,118 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             )}
           </div>
 
+          {isBiomes && (
+            <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(31,42,27,0.68),rgba(37,36,25,0.58)_52%,rgba(28,39,34,0.62))] p-6 shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-7">
+              <div className="mb-5 flex items-center gap-4">
+                <div className="h-px flex-1 bg-gradient-to-r from-[#cddf8b]/0 via-[#cddf8b]/55 to-[#7eb9d2]/0" />
+                <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
+                  Key Constraints
+                </h2>
+              </div>
+
+              <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {biomeConstraints.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-[1.45rem] border border-white/6 bg-[linear-gradient(145deg,rgba(255,255,255,0.055),rgba(255,255,255,0.025))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]"
+                  >
+                    <p className="text-[0.68rem] uppercase tracking-[0.28em] text-lime-100/54">
+                      Constraint
+                    </p>
+                    <h3 className="mt-3 break-words font-[family-name:var(--font-display)] text-[0.95rem] uppercase leading-5 tracking-[0.04em] text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-7 text-white/76">
+                      {item.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </article>
+          )}
+
+          {project.images && project.images.length > 0 && isBiomes && (
+            <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(155deg,rgba(31,43,29,0.7),rgba(27,30,23,0.58)_56%,rgba(24,36,34,0.62))] p-5 shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-6">
+              <div className="mb-4 flex items-center gap-4 px-2">
+                <div className="h-px flex-1 bg-gradient-to-r from-[#efe1a9]/0 via-[#efe1a9]/52 to-[#8dc2d7]/0" />
+                <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
+                  Gallery
+                </h2>
+              </div>
+
+              <ProjectImageCarousel
+                images={project.images}
+                projectTitle={project.title}
+                variant="default"
+              />
+            </article>
+          )}
+
+          {isBiomes && (
+            <div className="grid gap-6 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.3fr)]">
+              <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(34,45,28,0.66),rgba(35,31,23,0.56)_55%,rgba(28,37,33,0.6))] p-6 shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-7">
+                <div className="mb-5 flex items-center gap-4">
+                  <div className="h-px flex-1 bg-gradient-to-r from-[#efe1a9]/0 via-[#efe1a9]/46 to-[#7eb9d2]/0" />
+                  <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
+                    Role & Scope
+                  </h2>
+                </div>
+
+                <ul className="space-y-3 text-[1.02rem] leading-7 text-white/82">
+                  {biomeOwnership.map((item) => (
+                    <li key={item} className="flex gap-3">
+                      <span className="mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-br from-lime-200 to-emerald-400 shadow-[0_0_14px_rgba(163,230,53,0.28)]" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+
+              <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(30,42,30,0.66),rgba(29,35,25,0.56)_55%,rgba(25,35,35,0.6))] p-6 shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-7">
+                <div className="mb-5 flex items-center gap-4">
+                  <div className="h-px flex-1 bg-gradient-to-r from-[#cddf8b]/0 via-[#cddf8b]/52 to-[#7eb9d2]/0" />
+                  <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
+                    Biome Flow
+                  </h2>
+                </div>
+
+                <div className="space-y-4">
+                  {biomeArchitecture.map((item, index) => (
+                    <div key={item.title}>
+                      <div className="rounded-[1.45rem] border border-white/6 bg-[linear-gradient(145deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                        <div className="flex items-start gap-4">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-lime-200/20 bg-lime-200/[0.08] text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-lime-100/72">
+                            {item.label}
+                          </div>
+                          <div>
+                            <h3 className="font-[family-name:var(--font-display)] text-[1rem] uppercase tracking-[0.08em] text-white">
+                              {item.title}
+                            </h3>
+                            <p className="mt-2 text-sm leading-7 text-white/76">
+                              {item.body}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      {index < biomeArchitecture.length - 1 && (
+                        <div className="ml-5 mt-3 h-7 w-px bg-gradient-to-b from-[#e7d78e]/40 via-[#9acd86]/24 to-[#7eb9d2]/22" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </article>
+            </div>
+          )}
+
           {project.videos && project.videos.length > 0 && isWorlds && (
             <div className="space-y-6">
               {project.videos.map((video) => (
                 <article
                   key={video}
-                  className="rounded-[1.75rem] border border-violet-300/16 bg-[#1c1c1c]/95 p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6"
+                  className="rounded-[1.75rem] border border-[rgba(141,194,215,0.14)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6"
                 >
                   <div className="mb-4 flex items-center gap-4 px-2">
-                    <div className="h-px flex-1 bg-gradient-to-r from-violet-300/70 to-orange-300/20" />
+                    <div className="field-rule" />
                     <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
                       Video
                     </h2>
@@ -223,36 +407,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          {project.images && project.images.length > 0 && isBiomes && (
-            <article className="rounded-[1.75rem] border border-emerald-300/18 bg-[linear-gradient(155deg,rgba(19,32,24,0.96),rgba(19,21,18,0.92)_56%,rgba(18,28,28,0.94))] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6">
-              <div className="mb-4 flex items-center gap-4 px-2">
-                <div className="h-px flex-1 bg-gradient-to-r from-emerald-300/70 via-lime-200/35 to-sky-300/20" />
-                <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
-                  Field Atlas
-                </h2>
-              </div>
-
-              <ProjectImageCarousel
-                images={project.images}
-                projectTitle={project.title}
-                variant="default"
-              />
-            </article>
-          )}
-
           {isBiomes && (
             <div className="grid gap-4 md:grid-cols-2">
               {biomeWaypoints.map((item, index) => (
                 <article
                   key={item.title}
-                  className={`relative overflow-hidden rounded-[1.6rem] border border-emerald-300/14 bg-[linear-gradient(145deg,rgba(20,31,24,0.96),rgba(25,24,19,0.93)_56%,rgba(18,29,33,0.94))] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.34)] ${
+                  className={`relative overflow-hidden rounded-[1.9rem] border border-transparent bg-[linear-gradient(145deg,rgba(34,46,29,0.66),rgba(38,34,24,0.56)_56%,rgba(27,38,35,0.6))] p-6 shadow-[0_24px_54px_rgba(0,0,0,0.22)] backdrop-blur-md ${
                     index % 2 === 1 ? 'md:mt-8' : ''
                   }`}
                 >
                   <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(163,230,53,0.08),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(56,189,248,0.08),transparent_34%)]" />
                   <div className="relative">
                     <p className="text-[0.66rem] uppercase tracking-[0.28em] text-lime-100/56">
-                      Waypoint 0{index + 1}
+                      Focus 0{index + 1}
                     </p>
                     <h3 className="mt-3 font-[family-name:var(--font-display)] text-[1.15rem] uppercase tracking-[0.1em] text-white">
                       {item.title}
@@ -271,13 +438,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {worldsWaypoints.map((item, index) => (
                 <article
                   key={item.title}
-                  className={`relative overflow-hidden rounded-[1.6rem] border border-cyan-300/14 bg-[linear-gradient(145deg,rgba(20,28,38,0.96),rgba(24,22,36,0.93)_56%,rgba(18,26,40,0.95))] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.34)] ${
+                  className={`relative overflow-hidden rounded-[1.6rem] border border-[rgba(141,194,215,0.16)] bg-[linear-gradient(145deg,rgba(31,42,35,0.84),rgba(42,44,34,0.78)_56%,rgba(29,39,38,0.8))] p-6 shadow-[0_24px_70px_rgba(0,0,0,0.28)] ${
                     index % 2 === 1 ? 'md:mt-8' : ''
                   }`}
                 >
-                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.09),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(168,85,247,0.08),transparent_34%)]" />
+                  <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(205,223,139,0.1),transparent_38%),radial-gradient(circle_at_bottom_right,rgba(141,194,215,0.08),transparent_34%)]" />
                   <div className="relative">
-                    <p className="text-[0.66rem] uppercase tracking-[0.28em] text-cyan-100/56">
+                    <p className="text-[0.66rem] uppercase tracking-[0.28em] text-[#efe1a9]/56">
                       Creative Target 0{index + 1}
                     </p>
                     <h3 className="mt-3 font-[family-name:var(--font-display)] text-[1.15rem] uppercase tracking-[0.1em] text-white">
@@ -297,10 +464,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               {project.videos.map((video) => (
                 <article
                   key={video}
-                  className="rounded-[1.75rem] border border-violet-300/16 bg-[#1c1c1c]/95 p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6"
+                  className="rounded-[1.75rem] border border-[rgba(141,194,215,0.14)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))] p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6"
                 >
                   <div className="mb-4 flex items-center gap-4 px-2">
-                    <div className="h-px flex-1 bg-gradient-to-r from-violet-300/70 to-orange-300/20" />
+                    <div className="field-rule" />
                     <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
                       Video
                     </h2>
@@ -335,16 +502,16 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <article className={`rounded-[1.75rem] border p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6 ${
               isBiomes
                 ? 'border-emerald-300/18 bg-[linear-gradient(155deg,rgba(19,32,24,0.96),rgba(19,21,18,0.92)_56%,rgba(18,28,28,0.94))]'
-                : 'border-orange-300/16 bg-[#1c1c1c]/95'
+                : 'border-[rgba(220,231,191,0.12)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))]'
             }`}>
               <div className="mb-4 flex items-center gap-4 px-2">
                 <div className={`h-px flex-1 ${
                   isBiomes
                     ? 'bg-gradient-to-r from-emerald-300/70 via-lime-200/35 to-sky-300/20'
-                    : 'bg-gradient-to-r from-orange-300/70 to-violet-300/20'
+                    : 'bg-gradient-to-r from-[#efe1a9]/70 to-[#8dc2d7]/20'
                 }`} />
                 <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
-                  {isBiomes ? 'Field Atlas' : 'Gallery'}
+                  Gallery
                 </h2>
               </div>
 
@@ -357,11 +524,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
 
           {isBiomes && (
-            <article className="rounded-[1.75rem] border border-emerald-300/16 bg-[linear-gradient(145deg,rgba(18,27,23,0.95),rgba(22,24,18,0.93)_52%,rgba(18,25,29,0.94))] p-6 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-7">
+            <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(33,45,29,0.66),rgba(34,33,24,0.56)_52%,rgba(27,36,32,0.6))] p-6 shadow-[0_24px_54px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-7">
               <div className="mb-5 flex items-center gap-4">
-                <div className="h-px flex-1 bg-gradient-to-r from-lime-200/65 via-emerald-300/38 to-sky-300/20" />
+                <div className="h-px flex-1 bg-gradient-to-r from-[#efe1a9]/0 via-[#efe1a9]/46 to-[#8dc2d7]/0" />
                 <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
-                  Biome Palette
+                  Habitats and Conditions
                 </h2>
               </div>
 
@@ -379,25 +546,30 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           )}
 
           {project.sections && project.sections.length > 0 ? (
-            <div className={isShowcaseProject ? 'relative grid gap-6 md:grid-cols-2' : 'space-y-6'}>
-              {isBiomes && (
-                <div className="pointer-events-none absolute bottom-4 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-gradient-to-b from-lime-200/10 via-emerald-300/34 to-sky-300/10 md:block" />
-              )}
+            <div
+              className={
+                isBiomes
+                  ? 'space-y-7'
+                  : isWorlds
+                    ? 'relative grid gap-6 md:grid-cols-2'
+                    : 'space-y-6'
+              }
+            >
               {isWorlds && (
-                <div className="pointer-events-none absolute bottom-4 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-gradient-to-b from-cyan-200/10 via-cyan-300/34 to-violet-300/12 md:block" />
+                <div className="pointer-events-none absolute bottom-4 left-1/2 top-4 hidden w-px -translate-x-1/2 bg-gradient-to-b from-[#efe1a9]/0 via-[#cddf8b]/34 to-[#8dc2d7]/14 md:block" />
               )}
               {project.sections.map((section) => (
                 <article
                   key={section.heading}
                   className={`rounded-[1.75rem] border p-7 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm ${
                     isBiomes
-                      ? 'border-emerald-300/16 bg-[linear-gradient(145deg,rgba(19,31,24,0.95),rgba(24,22,18,0.93)_55%,rgba(18,28,32,0.94))]'
+                      ? 'rounded-[2rem] border-transparent bg-[linear-gradient(145deg,rgba(34,45,29,0.66),rgba(34,32,23,0.56)_55%,rgba(27,37,34,0.6))] shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md'
                       : isWorlds
-                        ? 'border-cyan-300/16 bg-[linear-gradient(145deg,rgba(19,27,38,0.95),rgba(24,21,33,0.93)_55%,rgba(18,25,37,0.94))]'
-                      : 'border-orange-300/16 bg-[#1c1c1c]/95'
+                        ? 'border-[rgba(141,194,215,0.16)] bg-[linear-gradient(145deg,rgba(30,41,35,0.84),rgba(42,44,34,0.78)_55%,rgba(29,39,38,0.8))]'
+                      : 'border-[rgba(220,231,191,0.12)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))]'
                   } ${
                     isBiomes
-                      ? 'md:odd:mt-0 md:even:mt-8'
+                      ? ''
                       : isWorlds
                         ? 'md:odd:mt-0 md:even:mt-7'
                         : ''
@@ -416,8 +588,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       isBiomes
                         ? 'bg-gradient-to-r from-emerald-300/68 via-lime-200/28 to-sky-300/18'
                         : isWorlds
-                          ? 'bg-gradient-to-r from-cyan-300/70 via-cyan-200/28 to-violet-300/20'
-                        : 'bg-gradient-to-r from-orange-300/70 to-violet-300/20'
+                          ? 'bg-gradient-to-r from-[#efe1a9]/70 via-[#cddf8b]/30 to-[#8dc2d7]/20'
+                        : 'bg-gradient-to-r from-[#efe1a9]/70 to-[#8dc2d7]/20'
                     }`} />
                     <h2 className={`${oswald.className} text-2xl uppercase tracking-[0.12em] text-white`}>
                       {section.heading}
@@ -436,7 +608,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                           <span className={`mt-[0.72rem] h-2.5 w-2.5 shrink-0 rounded-full ${
                             isBiomes
                               ? 'bg-gradient-to-br from-lime-200 to-emerald-400 shadow-[0_0_14px_rgba(163,230,53,0.28)]'
-                              : 'bg-gradient-to-br from-cyan-200 to-violet-400 shadow-[0_0_14px_rgba(34,211,238,0.26)]'
+                              : 'bg-gradient-to-br from-[#efe1a9] to-[#8dc2d7] shadow-[0_0_14px_rgba(141,194,215,0.22)]'
                           }`} />
                           <span>{paragraph}</span>
                         </li>
@@ -462,11 +634,34 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           ) : (
             project.responsibilities && (
-              <div className="rounded-[1.75rem] border border-white/12 bg-[#1c1c1c]/95 p-8 text-lg leading-8 text-white/82 shadow-[0_24px_70px_rgba(0,0,0,0.36)]">
+                <div className="rounded-[1.75rem] border border-[rgba(220,231,191,0.12)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))] p-8 text-lg leading-8 text-white/82 shadow-[0_24px_70px_rgba(0,0,0,0.3)]">
                 {project.responsibilities}
               </div>
             )
           )}
+
+          {isBiomes && (
+            <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(32,43,28,0.66),rgba(33,31,23,0.56)_52%,rgba(27,36,32,0.6))] p-6 shadow-[0_24px_54px_rgba(0,0,0,0.22)] backdrop-blur-md sm:p-7">
+              <div className="mb-5 flex items-center gap-4">
+                <div className="h-px flex-1 bg-gradient-to-r from-[#efe1a9]/0 via-[#efe1a9]/46 to-[#8dc2d7]/0" />
+                <h2 className={`${oswald.className} text-xl uppercase tracking-[0.12em] text-white`}>
+                  Findings in the Wild
+                </h2>
+              </div>
+
+              <div className="grid gap-4 lg:grid-cols-2">
+                {biomeResults.map((item) => (
+                  <div
+                    key={item}
+                    className="rounded-[1.2rem] border border-white/10 bg-white/[0.035] px-4 py-4 text-sm leading-7 text-white/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]"
+                  >
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </article>
+          )}
+
         </div>
 
         <aside className="space-y-6 lg:sticky lg:top-8">
@@ -474,11 +669,11 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             isBiomes
               ? 'border-emerald-300/16 bg-[linear-gradient(155deg,rgba(16,29,23,0.96),rgba(18,21,18,0.94)_55%,rgba(18,26,31,0.95))]'
               : isWorlds
-                ? 'border-cyan-300/16 bg-[linear-gradient(155deg,rgba(18,27,38,0.96),rgba(20,20,32,0.94)_55%,rgba(18,24,37,0.95))]'
-              : 'border-violet-300/16 bg-[#1c1c1c]/95'
+                ? 'border-[rgba(141,194,215,0.16)] bg-[linear-gradient(155deg,rgba(30,41,35,0.84),rgba(42,44,34,0.78)_55%,rgba(29,39,38,0.8))]'
+              : 'border-[rgba(141,194,215,0.14)] bg-[linear-gradient(145deg,rgba(35,48,33,0.76),rgba(42,47,35,0.66)_52%,rgba(32,43,40,0.7))]'
           }`}>
-            <p className="mb-6 text-sm uppercase tracking-[0.28em] text-violet-100/58">
-              {isBiomes ? 'System Snapshot' : isWorlds ? 'Arena Snapshot' : 'Snapshot'}
+            <p className="mb-6 text-sm uppercase tracking-[0.28em] text-[#dce9c0]/58">
+              {isBiomes ? 'Snapshot' : isWorlds ? 'Arena Snapshot' : 'Snapshot'}
             </p>
 
             <div className="space-y-5">
@@ -497,6 +692,17 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                     Date
                   </p>
                   <p className="mt-2 text-base text-white/88">{project.date}</p>
+                </div>
+              )}
+
+              {isBiomes && (
+                <div>
+                  <p className="text-xs uppercase tracking-[0.25em] text-white/48">
+                    Context
+                  </p>
+                  <p className="mt-2 text-base text-white/88">
+                    Live service mobile encounter environments for a global player base.
+                  </p>
                 </div>
               )}
 

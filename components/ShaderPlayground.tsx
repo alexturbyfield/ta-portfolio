@@ -153,7 +153,7 @@ function renderHighlightedCode(source: string) {
     return (
       <div key={`line-${index}`}>
         {codePart}
-        <span className="text-[#8fb0ff]">{commentPart}</span>
+        <span className="text-[#9fd0cf]">{commentPart}</span>
       </div>
     )
   })
@@ -349,17 +349,17 @@ export default function ShaderPlayground({
   }, [compiled.code, compiled.version])
 
   return (
-    <div className="mt-7 overflow-hidden rounded-[1.35rem] border border-orange-300/18 bg-[#0d0d0d] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[#181818] px-4 py-3">
+    <div className="mt-7 overflow-hidden rounded-[1.35rem] border border-[rgba(220,231,191,0.14)] bg-[linear-gradient(155deg,rgba(29,40,28,0.92),rgba(35,39,31,0.84)_58%,rgba(27,39,37,0.88))] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)]">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 bg-[rgba(18,27,20,0.55)] px-4 py-3">
         <div>
-          <p className="text-xs uppercase tracking-[0.24em] text-orange-100/62">
+          <p className="text-xs uppercase tracking-[0.24em] text-[#efe1a9]/68">
             {title}
           </p>
           <p className="mt-1 text-xs text-white/48">
             Browser-safe WebGL preview of the production shader idea.
           </p>
         </div>
-        <span className="rounded-full border border-violet-300/18 bg-violet-300/[0.08] px-2.5 py-1 text-[0.62rem] uppercase tracking-[0.2em] text-violet-100/72">
+        <span className="rounded-full border border-[rgba(141,194,215,0.22)] bg-[rgba(141,194,215,0.1)] px-2.5 py-1 text-[0.62rem] uppercase tracking-[0.2em] text-[#d7ecf3]/78">
           {language}
         </span>
       </div>
@@ -376,9 +376,9 @@ export default function ShaderPlayground({
             </div>
           </div>
 
-          <div className="rounded-[1.2rem] border border-orange-300/16 bg-white/[0.03] p-4">
+          <div className="rounded-[1.2rem] border border-[rgba(220,231,191,0.14)] bg-white/[0.035] p-4">
             <div className="mb-4 flex items-center justify-between gap-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-orange-100/62">
+              <p className="text-xs uppercase tracking-[0.24em] text-[#efe1a9]/68">
                 Live Controls
               </p>
             </div>
@@ -387,7 +387,7 @@ export default function ShaderPlayground({
               <label className="block">
                 <div className="mb-2 flex items-center justify-between gap-3 text-sm text-white/78">
                   <span>Horizontal phase</span>
-                  <span className="font-mono text-xs text-orange-100/70">
+                  <span className="font-mono text-xs text-[#efe1a9]/72">
                     {controls.horizontalPhase.toFixed(2)}
                   </span>
                 </div>
@@ -403,14 +403,14 @@ export default function ShaderPlayground({
                       horizontalPhase: Number(event.target.value),
                     }))
                   }
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-orange-300"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-[#cddf8b]"
                 />
               </label>
 
               <label className="block">
                 <div className="mb-2 flex items-center justify-between gap-3 text-sm text-white/78">
                   <span>Shrink amount</span>
-                  <span className="font-mono text-xs text-orange-100/70">
+                  <span className="font-mono text-xs text-[#efe1a9]/72">
                     {controls.shrinkAmount.toFixed(2)}
                   </span>
                 </div>
@@ -426,14 +426,14 @@ export default function ShaderPlayground({
                       shrinkAmount: Number(event.target.value),
                     }))
                   }
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-violet-300"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-[#8dc2d7]"
                 />
               </label>
 
               <label className="block">
                 <div className="mb-2 flex items-center justify-between gap-3 text-sm text-white/78">
                   <span>Pattern scale</span>
-                  <span className="font-mono text-xs text-orange-100/70">
+                  <span className="font-mono text-xs text-[#efe1a9]/72">
                     {controls.patternScale.toFixed(2)}
                   </span>
                 </div>
@@ -449,7 +449,7 @@ export default function ShaderPlayground({
                       patternScale: Number(event.target.value),
                     }))
                   }
-                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-orange-200"
+                  className="h-2 w-full cursor-pointer appearance-none rounded-full bg-white/12 accent-[#efe1a9]"
                 />
               </label>
             </div>
@@ -457,9 +457,9 @@ export default function ShaderPlayground({
         </div>
 
         <div className="flex min-h-[360px] flex-col">
-          <div className="flex flex-1 flex-col overflow-hidden rounded-[1.2rem] border border-violet-300/18 bg-[#080808]">
+          <div className="flex flex-1 flex-col overflow-hidden rounded-[1.2rem] border border-[rgba(220,231,191,0.14)] bg-[rgba(11,16,12,0.95)]">
             <div className="flex items-center justify-between gap-3 border-b border-white/10 bg-white/[0.03] px-4 py-3">
-              <p className="text-xs uppercase tracking-[0.24em] text-violet-100/62">
+              <p className="text-xs uppercase tracking-[0.24em] text-[#8dc2d7]/72">
                 Shader Code
               </p>
               <p className="text-[0.65rem] uppercase tracking-[0.2em] text-white/42">
@@ -476,7 +476,7 @@ export default function ShaderPlayground({
                 >
                   <pre
                     ref={previewRef}
-                    className="h-full w-full overflow-auto p-4 font-mono text-[11px] leading-5 whitespace-pre text-orange-50/88"
+                    className="h-full w-full overflow-auto p-4 font-mono text-[11px] leading-5 whitespace-pre text-[#f3efdf]/88"
                   >
                     {renderHighlightedCode(source)}
                   </pre>
@@ -495,7 +495,7 @@ export default function ShaderPlayground({
                   onScroll={() => syncScroll(textareaRef.current, previewRef.current)}
                   spellCheck={false}
                   wrap="off"
-                  className="absolute inset-0 min-h-[320px] w-full resize-none overflow-auto bg-transparent p-4 font-mono text-[11px] leading-5 text-orange-50/88 outline-none selection:bg-orange-300/25"
+                  className="absolute inset-0 min-h-[320px] w-full resize-none overflow-auto bg-transparent p-4 font-mono text-[11px] leading-5 text-[#f3efdf]/88 outline-none selection:bg-[#8dc2d7]/25"
                   aria-label="Editable shader code"
                 />
               )}
@@ -506,14 +506,14 @@ export default function ShaderPlayground({
             <button
               type="button"
               onClick={runShader}
-              className="rounded-full border border-orange-200/30 bg-orange-300/14 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-orange-50 transition hover:border-orange-200/55 hover:bg-orange-300/22"
+              className="rounded-full border border-[rgba(220,231,191,0.22)] bg-[rgba(220,231,191,0.1)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#f3efdf] transition hover:border-[rgba(220,231,191,0.34)] hover:bg-[rgba(220,231,191,0.16)]"
             >
               Run shader
             </button>
             <button
               type="button"
               onClick={resetShader}
-              className="rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-white/68 transition hover:border-violet-200/35 hover:bg-violet-300/12 hover:text-white"
+              className="rounded-full border border-[rgba(141,194,215,0.18)] bg-[rgba(141,194,215,0.08)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[#d7ecf3]/78 transition hover:border-[rgba(141,194,215,0.32)] hover:bg-[rgba(141,194,215,0.14)] hover:text-white"
             >
               Reset
             </button>

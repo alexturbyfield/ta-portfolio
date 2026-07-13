@@ -48,7 +48,7 @@ export default function ProjectImageCarousel({
     expandedImage && typeof document !== 'undefined'
       ? createPortal(
           <div
-            className="animate-lightbox-fade fixed inset-0 z-[999] bg-black/55 p-3 backdrop-blur-[2px] sm:p-5"
+            className="animate-lightbox-fade fixed inset-0 z-[999] bg-[rgba(11,16,12,0.42)] p-3 backdrop-blur-[2px] sm:p-5"
             role="dialog"
             aria-modal="true"
             aria-label={`${projectTitle} expanded gallery image`}
@@ -59,20 +59,20 @@ export default function ProjectImageCarousel({
             }}
           >
             <div className="animate-lightbox-panel flex min-h-full flex-col items-center justify-center gap-3">
-              <div className="flex w-full max-w-4xl shrink-0 items-center justify-between gap-4 rounded-[0.9rem] border border-white/10 bg-[#181818]/82 px-4 py-2 shadow-[0_16px_45px_rgba(0,0,0,0.4)]">
-                <p className="text-xs uppercase tracking-[0.24em] text-white/56">
+              <div className="flex w-full max-w-4xl shrink-0 items-center justify-between gap-4 rounded-[1rem] border border-[rgba(220,231,191,0.14)] bg-[linear-gradient(145deg,rgba(34,46,31,0.86),rgba(43,47,37,0.78)_55%,rgba(33,43,40,0.78))] px-4 py-2 shadow-[0_16px_45px_rgba(0,0,0,0.28)]">
+                <p className="text-xs uppercase tracking-[0.24em] text-[#efe1a9]/62">
                   {projectTitle} gallery
                 </p>
                 <button
                   type="button"
-                  className="rounded-full border border-white/14 bg-white/8 px-4 py-2 text-sm uppercase tracking-[0.16em] text-white/82 transition hover:bg-white/14 hover:text-white"
+                  className="rounded-full border border-[rgba(220,231,191,0.18)] bg-[rgba(220,231,191,0.08)] px-4 py-2 text-sm uppercase tracking-[0.16em] text-[#f3efdf] transition hover:border-[rgba(220,231,191,0.28)] hover:bg-[rgba(220,231,191,0.14)]"
                   onClick={() => setExpandedImage(null)}
                 >
                   Close
                 </button>
               </div>
 
-              <div className="relative h-[50vh] w-full max-w-4xl overflow-hidden rounded-[1.1rem] border border-white/14 bg-[#080808]/90 shadow-[0_30px_100px_rgba(0,0,0,0.55)]">
+              <div className="relative h-[50vh] w-full max-w-4xl overflow-hidden rounded-[1.1rem] border border-[rgba(220,231,191,0.14)] bg-[rgba(20,28,22,0.92)] shadow-[0_30px_100px_rgba(0,0,0,0.4)]">
                 <Image
                   src={expandedImage}
                   alt={`${projectTitle} expanded gallery image`}
@@ -91,7 +91,7 @@ export default function ProjectImageCarousel({
     <>
       <div className="space-y-4">
         {variant === 'onion' ? (
-          <div className="relative overflow-hidden rounded-[1.45rem] border border-white/12 bg-[#0a0a0a] px-3 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.32)] sm:px-5">
+          <div className="relative overflow-hidden rounded-[1.45rem] border border-[rgba(220,231,191,0.14)] bg-[linear-gradient(155deg,rgba(31,42,29,0.82),rgba(35,38,29,0.75)_58%,rgba(27,39,37,0.8))] px-3 py-4 shadow-[0_18px_55px_rgba(0,0,0,0.24)] sm:px-5">
             <div className="relative mx-auto aspect-[16/10] w-full max-w-4xl">
               <button
                 type="button"
@@ -166,7 +166,7 @@ export default function ProjectImageCarousel({
                 <button
                   type="button"
                   onClick={showPrevious}
-                  className="rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-orange-300/35 hover:bg-black/75 hover:text-white"
+                  className="rounded-full border border-[rgba(220,231,191,0.16)] bg-[rgba(19,27,20,0.68)] px-3 py-2 text-sm text-[#f3efdf]/84 backdrop-blur-sm transition hover:border-[rgba(205,223,139,0.32)] hover:bg-[rgba(19,27,20,0.82)] hover:text-white"
                   aria-label="Show previous image"
                 >
                   Prev
@@ -174,7 +174,7 @@ export default function ProjectImageCarousel({
                 <button
                   type="button"
                   onClick={showNext}
-                  className="rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-violet-300/35 hover:bg-black/75 hover:text-white"
+                  className="rounded-full border border-[rgba(220,231,191,0.16)] bg-[rgba(19,27,20,0.68)] px-3 py-2 text-sm text-[#f3efdf]/84 backdrop-blur-sm transition hover:border-[rgba(141,194,215,0.32)] hover:bg-[rgba(19,27,20,0.82)] hover:text-white"
                   aria-label="Show next image"
                 >
                   Next
@@ -221,7 +221,7 @@ export default function ProjectImageCarousel({
                 <button
                   type="button"
                   onClick={showPrevious}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-orange-300/35 hover:bg-black/75 hover:text-white"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full border border-[rgba(220,231,191,0.16)] bg-[rgba(19,27,20,0.68)] px-3 py-2 text-sm text-[#f3efdf]/84 backdrop-blur-sm transition hover:border-[rgba(205,223,139,0.32)] hover:bg-[rgba(19,27,20,0.82)] hover:text-white"
                   aria-label="Show previous image"
                 >
                   Prev
@@ -229,7 +229,7 @@ export default function ProjectImageCarousel({
                 <button
                   type="button"
                   onClick={showNext}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-white/14 bg-black/55 px-3 py-2 text-sm text-white/82 backdrop-blur-sm transition hover:border-violet-300/35 hover:bg-black/75 hover:text-white"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full border border-[rgba(220,231,191,0.16)] bg-[rgba(19,27,20,0.68)] px-3 py-2 text-sm text-[#f3efdf]/84 backdrop-blur-sm transition hover:border-[rgba(141,194,215,0.32)] hover:bg-[rgba(19,27,20,0.82)] hover:text-white"
                   aria-label="Show next image"
                 >
                   Next
@@ -248,7 +248,7 @@ export default function ProjectImageCarousel({
                 onClick={() => setActiveIndex(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === activeIndex
-                    ? 'w-9 bg-gradient-to-r from-orange-300 to-violet-300'
+                    ? 'w-9 bg-gradient-to-r from-[#efe1a9] via-[#cddf8b] to-[#8dc2d7]'
                     : 'w-2 bg-white/22 hover:bg-white/45'
                 }`}
                 aria-label={`Show image ${index + 1}`}
