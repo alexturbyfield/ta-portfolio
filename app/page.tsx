@@ -269,13 +269,19 @@ export default function Home() {
     <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-[#06090f] shadow-[0_32px_120px_rgba(0,0,0,0.34)]">
       <div className="relative">
         <div className="relative min-h-[46rem] overflow-hidden border-b border-white/8">
-          <Image
-            src="/images/main/home-hero-biomes-composite-v7.png"
-            alt="Expansive biome panorama"
-            fill
-            priority
-            className="object-cover object-center"
-          />
+          <video
+            className="absolute inset-0 h-full w-full object-cover object-center"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/main/home-hero-biomes-composite-v7.png"
+            aria-label="Biome transition reel"
+          >
+            <source src="/videos/main-page-video.mp4" type="video/mp4" />
+            <source src="/videos/main-page-video.mov" type="video/quicktime" />
+          </video>
           <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,8,13,0.88)_0%,rgba(5,8,13,0.62)_34%,rgba(5,8,13,0.3)_58%,rgba(5,8,13,0.24)_100%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,12,18,0.12)_0%,rgba(8,12,18,0.08)_34%,rgba(8,12,18,0.62)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#06090f] to-transparent" />
@@ -289,7 +295,6 @@ export default function Home() {
                     <span className="hero-title-line hero-title-line-2">that inspire</span>
                     <span className="hero-title-line hero-title-line-3">exploration.</span>
                   </h1>
-                  <Icon kind="spark" className="mt-5 h-6 w-6 shrink-0 text-[#f0c468]/90" />
                 </div>
                 <p className="max-w-[27rem] text-lg leading-9 text-white/84">
                   Technical art systems that bring large-scale, real-world
