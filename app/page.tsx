@@ -291,9 +291,8 @@ export default function Home() {
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <h1 className="hero-title">
-                    <span className="hero-title-line hero-title-line-1">Building worlds</span>
-                    <span className="hero-title-line hero-title-line-2">that inspire</span>
-                    <span className="hero-title-line hero-title-line-3">exploration.</span>
+                    <span className="hero-title-line hero-title-line-1">Alex Turbyfield</span>
+                    <span className="hero-title-line hero-title-line-2">Creative design</span>
                   </h1>
                 </div>
                 <p className="max-w-[27rem] text-lg leading-9 text-white/84">
