@@ -34,8 +34,8 @@ const stats: StatItem[] = [
     icon: 'users',
   },
   {
-    title: 'Global',
-    detail: 'Representative environments',
+    title: 'Location Matters',
+    detail: 'Data-driven environments',
     icon: 'globe',
   },
   {
@@ -286,7 +286,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,12,18,0.12)_0%,rgba(8,12,18,0.08)_34%,rgba(8,12,18,0.62)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#06090f] to-transparent" />
 
-          <div className="relative flex min-h-[46rem] items-start px-8 pb-36 pt-16 sm:px-10 lg:px-14 lg:pt-20">
+          <div className="relative flex min-h-[46rem] items-start px-8 pb-16 pt-16 sm:px-10 sm:pb-36 lg:px-14 lg:pt-20">
             <div className="max-w-[34rem] space-y-7">
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -305,7 +305,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="absolute inset-x-8 bottom-8 sm:inset-x-10 lg:inset-x-14">
+          <div className="absolute inset-x-8 bottom-8 hidden sm:inset-x-10 sm:block lg:inset-x-14">
             <div className="grid gap-3 rounded-[1.4rem] border border-white/12 bg-[rgba(17,20,26,0.72)] p-4 shadow-[0_24px_80px_rgba(0,0,0,0.34)] backdrop-blur-xl md:grid-cols-4 md:gap-0 md:p-0">
               {stats.map((item, index) => (
                 <div

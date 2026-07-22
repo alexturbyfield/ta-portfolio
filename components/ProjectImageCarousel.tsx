@@ -7,18 +7,21 @@ import { createPortal } from 'react-dom'
 type ProjectImageCarouselProps = {
   images: string[]
   projectTitle: string
+  captions?: Record<string, string>
   variant?: 'default' | 'onion'
 }
 
 export default function ProjectImageCarousel({
   images,
   projectTitle,
+  captions = {},
   variant = 'default',
 }: ProjectImageCarouselProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [expandedImage, setExpandedImage] = useState<string | null>(null)
 
   const activeImage = images[activeIndex]
+  const activeCaption = captions[activeImage]
 
   useEffect(() => {
     if (!expandedImage) return
@@ -81,6 +84,11 @@ export default function ProjectImageCarousel({
                   className="object-contain"
                 />
               </div>
+              {captions[expandedImage] && (
+                <p className="w-full max-w-4xl rounded-full border border-white/12 bg-black/45 px-4 py-2 text-center text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
+                  {captions[expandedImage]}
+                </p>
+              )}
             </div>
           </div>,
           document.body,
@@ -136,7 +144,7 @@ export default function ProjectImageCarousel({
 
                 <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08)_0%,rgba(0,0,0,0.14)_42%,rgba(0,0,0,0.64)_100%)]" />
                 <div className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
-                  Tap for detail
+                  {activeCaption ?? 'Tap for detail'}
                 </div>
                 <div className="absolute bottom-4 right-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
                   {activeIndex + 1} / {images.length}
@@ -209,7 +217,7 @@ export default function ProjectImageCarousel({
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/42 via-transparent to-black/10 opacity-80" />
               <div className="absolute bottom-4 left-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
-                Click to expand
+                {activeCaption ?? 'Click to expand'}
               </div>
               <div className="absolute bottom-4 right-4 rounded-full border border-white/12 bg-black/55 px-3 py-1 text-xs uppercase tracking-[0.18em] text-white/76 backdrop-blur-sm">
                 {activeIndex + 1} / {images.length}

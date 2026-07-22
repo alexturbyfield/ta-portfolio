@@ -24,6 +24,7 @@ export type Project = {
   heroImagePosition?: string
   heroBackgroundImage?: string
   images?: string[]
+  imageCaptions?: Record<string, string>
   carouselVariant?: 'default' | 'onion'
   videos?: string[]
   sections?: ProjectSection[]

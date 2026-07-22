@@ -131,6 +131,40 @@ const worldsWaypoints = [
   },
 ]
 
+const whatsYourFavoriteShowcase = [
+  {
+    src: '/images/projects/whats-your-favorite/trevor-noah.jpg',
+    alt: "Trevor Noah What's Your Favorite production render",
+    caption: 'Production render',
+    frameClass: 'md:col-span-6',
+    aspectClass: 'aspect-[2/3]',
+    imageClass: 'object-cover',
+  },
+  {
+    src: '/images/projects/whats-your-favorite/wyf02.webp',
+    alt: "What's Your Favorite mobile share screen",
+    frameClass: 'md:col-span-5 md:mt-12',
+    aspectClass: 'aspect-[1/2]',
+    imageClass: 'object-cover',
+  },
+  {
+    src: '/images/projects/whats-your-favorite/wyf01.jpg',
+    alt: "What's Your Favorite Gengar AR photo moment",
+    frameClass: 'md:col-span-7 md:-mt-20 md:ml-8 md:scale-[1.04]',
+    aspectClass: 'aspect-[4/5]',
+    imageClass: 'object-cover',
+    featured: true,
+  },
+  {
+    src: '/images/projects/whats-your-favorite/lady-gaga.jpg',
+    alt: "Lady Gaga What's Your Favorite production render",
+    caption: 'Production render',
+    frameClass: 'md:col-span-5 md:-mt-44',
+    aspectClass: 'aspect-[2/3]',
+    imageClass: 'object-cover',
+  },
+]
+
 type ProjectPageProps = {
   params: Promise<{ slug: string }>
 }
@@ -143,6 +177,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const isBiomes = project.slug === 'pogo-encounters'
   const isWorlds = project.slug === 'pokemon-worlds-2025-battle-arena'
+  const isWhatsYourFavorite = project.slug === 'pogo-whats-your-favorite-ar'
   const isShowcaseProject = isBiomes || isWorlds
 
   return (
@@ -265,6 +300,38 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             )}
           </div>
 
+          {isWhatsYourFavorite && (
+            <section className="grid items-start gap-5 md:grid-cols-12 md:gap-6">
+              {whatsYourFavoriteShowcase.map((item) => (
+                <figure
+                  key={item.src}
+                  className={`relative ${item.featured ? 'z-10 drop-shadow-[0_28px_48px_rgba(239,225,169,0.16)]' : 'drop-shadow-[0_20px_36px_rgba(0,0,0,0.28)]'} ${item.frameClass}`}
+                >
+                  {item.featured && (
+                    <div className="pointer-events-none absolute -inset-4 rounded-[2rem] bg-[radial-gradient(circle_at_center,rgba(239,225,169,0.18),transparent_68%)] blur-sm" />
+                  )}
+                  <div className={`relative overflow-hidden rounded-[1.15rem] ${item.aspectClass}`}>
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      sizes="(min-width: 1024px) 560px, (min-width: 768px) 50vw, 100vw"
+                      className={item.imageClass}
+                    />
+                    {item.caption && (
+                      <>
+                        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/38 to-transparent" />
+                        <figcaption className="absolute bottom-2 left-2 rounded-full border border-white/8 bg-black/28 px-2 py-1 text-[0.52rem] font-medium uppercase tracking-[0.16em] text-white/58 backdrop-blur-sm">
+                          {item.caption}
+                        </figcaption>
+                      </>
+                    )}
+                  </div>
+                </figure>
+              ))}
+            </section>
+          )}
+
           {isBiomes && (
             <article className="rounded-[2rem] border border-transparent bg-[linear-gradient(145deg,rgba(31,42,27,0.68),rgba(37,36,25,0.58)_52%,rgba(28,39,34,0.62))] p-6 shadow-[0_26px_60px_rgba(0,0,0,0.24)] backdrop-blur-md sm:p-7">
               <div className="mb-5 flex items-center gap-4">
@@ -307,6 +374,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <ProjectImageCarousel
                 images={project.images}
                 projectTitle={project.title}
+                captions={project.imageCaptions}
                 variant="default"
               />
             </article>
@@ -498,7 +566,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             </div>
           )}
 
-          {project.images && project.images.length > 0 && !isBiomes && (
+          {project.images && project.images.length > 0 && !isBiomes && !isWhatsYourFavorite && (
             <article className={`rounded-[1.75rem] border p-5 shadow-[0_30px_80px_rgba(0,0,0,0.38)] backdrop-blur-sm sm:p-6 ${
               isBiomes
                 ? 'border-emerald-300/18 bg-[linear-gradient(155deg,rgba(19,32,24,0.96),rgba(19,21,18,0.92)_56%,rgba(18,28,28,0.94))]'
@@ -518,6 +586,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <ProjectImageCarousel
                 images={project.images}
                 projectTitle={project.title}
+                captions={project.imageCaptions}
                 variant={project.carouselVariant}
               />
             </article>
