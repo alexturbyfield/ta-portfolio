@@ -61,16 +61,16 @@ const capabilities: CapabilityItem[] = [
 
 const selectedWork: WorkItem[] = [
   {
-    title: 'Pokemon GO Biomes',
+    title: 'Pokémon GO Biomes',
     subtitle: 'Feature lead · Technical art',
     href: '/projects/pogo-encounters',
     image: '/images/projects/biomes/biomes-day.png',
   },
   {
-    title: 'URP Conversion',
-    subtitle: 'Graphics migration',
-    href: '/projects/pogo-urp',
-    image: '/images/projects/urp-header.jpg',
+    title: "What's Your Favorite?",
+    subtitle: 'AR composition systems',
+    href: '/projects/pogo-whats-your-favorite-ar',
+    image: '/images/projects/whats-your-favorite.webp',
   },
   {
     title: 'World Championships Arena',
