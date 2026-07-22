@@ -38,7 +38,7 @@ export default function SiteHeader() {
                 Alex Turbyfield
               </p>
               <p className="truncate text-[0.64rem] font-medium uppercase tracking-[0.18em] text-[#f0c468]">
-                Creative design
+                Creative technology
               </p>
             </div>
           </Link>
